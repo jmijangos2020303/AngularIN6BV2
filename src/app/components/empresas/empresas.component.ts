@@ -83,7 +83,7 @@ export class EmpresasComponent implements OnInit {
         Swal.fire({
           icon: 'success',
           title: '!OK!',
-          text: 'La empresaaaaa ' + [this.empresasModelPost.nombre] + ' se ha eliminado correctamente'
+          text: 'La empresa ' + [this.empresasModelPost.nombre] + ' se ha eliminado correctamente'
         })
         this.getEmpresas();
       },

@@ -35,7 +35,8 @@ export class EmpresasService {
 
   eliminarEmpresa(idCat : String): Observable<any> {
 
-    return this._http.delete(this.url + '/eliminarEmpresa/' + idCat, { headers: this.headersVariable })
+    let headersToken = this.headersVariable.set('Authorization', this.obtenerToken());
+    return this._http.delete(this.url + '/eliminarEmpresa/' + idCat, { headers: headersToken })
   }
 
   obtenerToken(){
