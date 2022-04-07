@@ -15,6 +15,9 @@
         <li class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">login</a>
         </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" *ngIf="_usuarioService.getIdentidad()">{{ _usuarioService.getIdentidad().nombre }}</a>
+        </li>
       </ul>
       <form class="d-flex">
         <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">

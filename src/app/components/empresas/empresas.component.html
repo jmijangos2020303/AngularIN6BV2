@@ -15,7 +15,13 @@
             {{empre.descripcion}}
           </p>
         </div>
-        <div class="card-footer bg-transparent border-success">Footer</div>
+        <div class="card-footer text-muted">
+          <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+            <button type="button" class="btn btn-danger"
+            (click)="deleteEmpresa(empre._id)">Eliminar</button>
+            <button type="button" class="btn btn-warning">Editar</button>
+          </div>
+        </div>
       </div>
     </div>
   </div>

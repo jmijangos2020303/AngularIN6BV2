@@ -2,14 +2,14 @@
 <body>
 
 
-
-
   <form class="text-center border border-light p-5">
     <p class="h4 mb-4">Login </p>
     <!-- Email -->
-    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+    <input type="email" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail" name="email" #email="ngModel"
+    [(ngModel)]="usuarioModel.email">
     <!-- Password -->
-    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password">
+    <input type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Password" name="password" #password="ngModel"
+    [(ngModel)]="usuarioModel.password">
     <div class="d-flex justify-content-around">
 
       <div>
@@ -18,18 +18,14 @@
       </div>
     </div>
     <!-- Sign in button -->
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" routerLink="/registro" type="submit">Entrar</button>
+    <button type="button" class="btn btn-primary" data-bs-toggle="modal" type="submit" (click)="login()">Iniciar Sesion</button>
     <!-- Register -->
     <p>
       <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
         Registrase
       </button>
     </p>
-
-
-
   </form>
-
 
 
 
