@@ -12,7 +12,9 @@ const routes: Routes = [
   {path: "registro", component: RegistroComponent},
   {path: "inicio", component: PaginaPrincipallComponent },
   {path: "sucursales", component: SucursalesComponent },
-  {path: "empresas", component: EmpresasComponent }
+  {path: "empresas", component: EmpresasComponent },
+  {path: '**', component: LoginComponent}
+
 ];
 
 @NgModule({
