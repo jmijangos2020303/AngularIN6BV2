@@ -31,6 +31,22 @@ export class EmpresasService {
   }
 
 
+  obtenerEmpresaID(idEmpresa:String): Observable<any>{
+
+    let headersToken = this.headersVariable.set('Authorization', this.obtenerToken());
+
+    return this._http.get(this.url + '/obtenerEmpresa/' + idEmpresa, {headers: headersToken});
+   }
+
+
+   editarEmpresa(modeloEmpresas: Empresas): Observable<any>{
+    let parametros = JSON.stringify(modeloEmpresas);
+
+    let headersToken = this.headersVariable.set('Authorization', this.obtenerToken());
+
+    return this._http.put(this.url + '/editarEmpresa/' + modeloEmpresas._id, parametros, {headers: headersToken});
+  }
+
 
 
   eliminarEmpresa(idCat : String): Observable<any> {

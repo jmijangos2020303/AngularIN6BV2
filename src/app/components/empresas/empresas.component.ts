@@ -17,7 +17,6 @@ export class EmpresasComponent implements OnInit {
   public empresasModelGet: Empresas;
   public empresasModelPost: Empresas;
   public empresaIDModel: Empresas;
-
   public token;
 
   constructor(
@@ -28,7 +27,8 @@ export class EmpresasComponent implements OnInit {
       '',
       '',
       ''
-    )
+    );
+    this.empresaIDModel = new Empresas('', '', '')
     this.token = this._usuarioService.getToken()
   }
 
@@ -48,6 +48,8 @@ export class EmpresasComponent implements OnInit {
       }
     )
   }
+
+
 
   postEmpresas(){
     this._empresasService.agregarEmpresa(this.empresasModelPost).subscribe(
@@ -74,6 +76,40 @@ export class EmpresasComponent implements OnInit {
     )
   }
 
+
+  obtenerEmpresasID(idEmpresa){
+    this._empresasService.obtenerEmpresaID(idEmpresa).subscribe(
+      response => {
+        console.log(response);
+        this.empresaIDModel = response.empresa;
+
+      }
+    )
+  }
+
+
+
+  editarEmpresa(){
+    this._empresasService.editarEmpresa(this.empresaIDModel).subscribe(
+      response => {
+        console.log(response);
+          Swal.fire({
+            icon: 'success',
+            title: '!OK!',
+            text: 'Empresa editada correctamente'
+          })
+          this.getEmpresas();
+      },
+        error => {
+          console.log(<any>error);
+          Swal.fire({
+            icon: 'warning',
+            title: '!Opppsss.....!',
+            text: 'No se ha podido editar la empresa'
+          })
+        }
+    )
+  }
 
 
   deleteEmpresa(idCat) {

@@ -6,7 +6,7 @@
     Agregar Empresa
   </button>
 
-  <div class="row">
+  <!--<div class="row">
     <div class="col-12 col-md-4" *ngFor="let empre of empresasModelGet">
       <div class="card border-success mb-3">
         <div class="card-header bg-transparent border-success">{{ empre.nombre }}</div>
@@ -19,13 +19,32 @@
           <div class="btn-group" role="group" aria-label="Basic mixed styles example">
             <button type="button" class="btn btn-danger"
             (click)="deleteEmpresa(empre._id)">Eliminar</button>
-            <button type="button" class="btn btn-warning">Editar</button>
+            <button type="button" class="btn btn-secondary">Editar</button>
           </div>
         </div>
       </div>
     </div>
+  </div>-->
+
+
+  <div class="card" style="width: 18rem;" *ngFor="let empre of empresasModelGet">
+    <img src="../../../assets/vid.img/fcb.jpg" class="card-img-top" alt="...">
+    <div class="card-body">
+      <h5 class="card-title">{{ empre.nombre }}</h5>
+      <p class="card-text">
+        {{empre.descripcion}}
+      </p>
+    </div>
+    <div class="card-body">
+      <button type="button" class="btn btn-danger"
+            (click)="deleteEmpresa(empre._id)">Eliminar</button>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+            aria-controls="offcanvasExample" (click)="obtenerEmpresasID(empre._id)">
+              Editar</button>
+    </div>
   </div>
 </div>
+
 
 
 <!-- Modal Agregar Empresa -->
@@ -57,4 +76,29 @@
     </div>
   </div>
 </div>
+
+<!-- Modal Editar-->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Empresa</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+      <div class="mg-3">
+        <label for="inputNombre" class="form-label">Nombre Empresa</label>
+        <input type="text" id="inputNombre" class="form-control" name="nombre" #nombre="ngModel"
+        [(ngModel)]="empresaIDModel.nombre">
+      </div>
+      <div class="mg-3">
+        <label for="inputDescripcion" class="form-label">Descripcion</label>
+        <input type="text" id="inputDescripcion" class="form-control" name="descripcion" #descripcion="ngModel"
+        [(ngModel)]="empresaIDModel.descripcion">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="editarEmpresa()">Editar Empresa</button>
+
+    </form>
+  </div>
+</div>
 </body>
+
