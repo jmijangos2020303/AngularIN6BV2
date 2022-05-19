@@ -57,15 +57,49 @@
       </div>
       <div class="modal-body">
         <form>
+
+
+
           <div class="mg-3">
             <label for="inputNombre" class="form-label">Nombre Empresa</label>
             <input type="text" id="inputNombre" class="form-control" name="nombre" #nombre="ngModel"
             [(ngModel)]="empresasModelPost.nombre">
           </div>
+
+
+
+
+          <div class="mb-3">
+            <label for="Dire" class="form-label">Dirección</label>
+            <select class="form-select" aria-label="multiple select example" id="Dire" name="Dire" #Dire="ngModel" [(ngModel)]="empresasModelPost.direccion">
+              <option *ngFor="let departamento of departamentos" [value]="departamento.codigo">{{departamento.nombre}}</option>
+            </select>
+          </div>
+
+
+
+          <div class="mb-3">
+            <label for="Tel" class="form-label">Telefono</label>
+            <input type="tel" class="form-control" id="Tel" placeholder="Ingresar el Telefono" name="tel" #tel="ngModel"
+            [(ngModel)]="empresasModelPost.telefono">
+          </div>
+
+
+
+
           <div class="mg-3">
             <label for="inputDescripcion" class="form-label">Descripcion</label>
             <input type="text" id="inputDescripcion" class="form-control" name="descripcion" #descripcion="ngModel"
             [(ngModel)]="empresasModelPost.descripcion">
+          </div>
+
+
+
+          <div class="mb-3">
+            <label for="TipoEm" class="form-label">Tipo de Empresa</label>
+            <select class="form-select" aria-label="multiple select example" id="TipoEm" name="tipoEmpresa" #tipoEmpresa="ngModel" [(ngModel)]="empresasModelPost.tipoEmpresa">
+              <option *ngFor="let tipo of tipoEmpresas" [value]="tipo.codigo">{{tipo.nombre}}</option>
+            </select>
           </div>
         </form>
       </div>

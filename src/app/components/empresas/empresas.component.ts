@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Empresas } from 'src/app/models/empresas.model';
 import { EmpresasService } from 'src/app/services/empresas.services.service';
 import { UsuarioService } from 'src/app/services/usuario.service';
+import { environment, environment2 } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 
 
@@ -26,11 +27,17 @@ export class EmpresasComponent implements OnInit {
     this.empresasModelPost = new Empresas(
       '',
       '',
+      '',
+      0,
+      '',
       ''
     );
-    this.empresaIDModel = new Empresas('', '', '')
+    this.empresaIDModel = new Empresas('', '', '', 0, '', '')
     this.token = this._usuarioService.getToken()
   }
+
+  tipoEmpresas = environment2.tipoEmpresas;
+  departamentos = environment.departamentos;
 
   ngOnInit(): void {
     this.getEmpresas();
@@ -62,7 +69,10 @@ export class EmpresasComponent implements OnInit {
           })
         this.getEmpresas();
         this.empresasModelPost.nombre = '';
+        this.empresasModelPost.direccion = '';
+        this.empresasModelPost.telefono = 0;
         this.empresasModelPost.descripcion = '';
+        this.empresasModelPost.tipoEmpresa = '';
       },
       (error)=>{
         console.log(<any>error);
