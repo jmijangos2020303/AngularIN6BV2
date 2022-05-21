@@ -5,7 +5,13 @@ export class Empresas {
     public direccion:String,
     public telefono: Number,
     public descripcion: String,
-    public tipoEmpresa:String
+    public tipoEmpresa:String,
+    public productos: [{
+      nombreProducto: String,
+      precioProducto: Number,
+      stock: Number
+    }],
+    public idEmpresa: String,
   ){}
 
 

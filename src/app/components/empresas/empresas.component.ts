@@ -30,9 +30,20 @@ export class EmpresasComponent implements OnInit {
       '',
       0,
       '',
+      '',
+      [{
+        nombreProducto: '',
+        precioProducto: 0,
+        stock: 0
+      }],
       ''
     );
-    this.empresaIDModel = new Empresas('', '', '', 0, '', '')
+    this.empresaIDModel = new Empresas('', '', '', 0, '', '',[{
+      nombreProducto: '',
+      precioProducto: 0,
+      stock: 0
+    }],
+    '')
     this.token = this._usuarioService.getToken()
   }
 
