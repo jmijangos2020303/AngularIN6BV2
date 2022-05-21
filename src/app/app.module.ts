@@ -11,6 +11,7 @@ import { SucursalesComponent } from './components/sucursales/sucursales.componen
 import { EmpresasComponent } from './components/empresas/empresas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { FormsModule } from '@angular/forms';
     PaginaPrincipallComponent,
     SucursalesComponent,
     EmpresasComponent,
+    SearchPipe,
 
   ],
   imports: [
