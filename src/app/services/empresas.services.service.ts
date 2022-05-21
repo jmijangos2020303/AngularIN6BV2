@@ -3,6 +3,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Observable } from 'rxjs';
 import { Empresas } from '../models/empresas.model';
 import { UsuarioService } from './usuario.service';
+import {Productos} from '../models/productos.model';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -67,4 +70,53 @@ export class EmpresasService {
   return this.token;
   }
 
-}
+
+    /* PRODUCTOS */
+
+     agregarProductos(modeloProducto: Productos, token): Observable<any> {
+       let parametros = JSON.stringify(modeloProducto);
+       let headersToken = this.headersVariable.set('Authorization', token)
+       return this._http.put(this.url + '/agregarProductoEmpresa', parametros, {headers: headersToken})
+    }
+
+
+
+     obtenerProductos(token): Observable<any> {
+       let headersToken = this.headersVariable.set('Authorization', token)
+       return this._http.get(this.url + '/obtenerProductosEmpresa', {headers: headersToken})
+    }
+
+
+
+    obtenerProductosById(idProducto, token): Observable<any> {
+       let headersToken = this.headersVariable.set('Authorization', token)
+       return this._http.get(this.url + '/obtenerProductobyid' + idProducto, {headers: headersToken})
+    }
+
+
+
+    editarProducto(modeloProducto: Productos, token): Observable<any> {
+        let headersToken = this.headersVariable.set('Authorization', token)
+        let parametros = JSON.stringify(modeloProducto)
+        return this._http.put(this.url + '/editarProductoEmpresa/' + modeloProducto._id, parametros, {headers: headersToken})
+    }
+
+
+
+    eliminarProducto(idProducto, token){
+        let headersToken = this.headersVariable.set('Authorization', token)
+         return this._http.delete(this.url + '/eliminarProductoEmpresa/'+ idProducto, {headers: headersToken})
+    }
+
+
+
+    agregarProductoaSucursal(modeloProducto: Productos, token, idSucursal, idProducto): Observable<any>{
+      let parametros = JSON.stringify(modeloProducto);
+      let headersToken = this.headersVariable.set('Authorization', token);
+      return this._http.put(this.url + '/agregarProductosSucursal' + idSucursal + '/' + idProducto, parametros, {headers: headersToken})
+    }
+
+
+  }
+
+
