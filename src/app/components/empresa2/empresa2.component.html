@@ -1,0 +1,58 @@
+<body onload="init()" style="background: url(../../../assets/vid.img/fondo.jpg) no-repeat; background-size: cover;">
+
+  <div class="container">
+
+    <!--<div class="row">
+      <div class="col-12 col-md-4" *ngFor="let empre of empresasModelGet">
+        <div class="card border-success mb-3">
+          <div class="card-header bg-transparent border-success">{{ empre.nombre }}</div>
+          <div class="card-body text-success">
+            <p class="card-text">
+              {{empre.descripcion}}
+            </p>
+          </div>
+          <div class="card-footer text-muted">
+            <div class="btn-group" role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-danger"
+              (click)="deleteEmpresa(empre._id)">Eliminar</button>
+              <button type="button" class="btn btn-secondary">Editar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>-->
+
+    <div class="col-lg-9 col-md-8">
+      <h1 class="font-weight-bold mb-0" *ngIf="_usuarioService.getIdentidad()">Bienvenido {{
+        _usuarioService.getIdentidad().nombre }} </h1>
+      <p class="lead text-muted">Revisa tu información detallada</p>
+    </div>
+
+    <div class="row">
+    <div class="card" class="card" style="width: 18rem;" *ngFor="let empre of empresasModelGet">
+      <img src="../../../assets/vid.img/fcb.jpg" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">{{ empre.nombre }}</h5>
+        <p class="card-text">
+          {{empre.descripcion}}
+        </p>
+        <h8 class="card-text">Lugar: {{ empre.direccion }}</h8>
+        <p></p>
+        <h8 class="card-text">Contacto: {{ empre.telefono }}</h8>
+      </div>
+      <div class="card-body">
+        <button type="button" class="btn btn-danger"
+              (click)="deleteEmpresa(empre._id)">Eliminar</button>
+              <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+              aria-controls="offcanvasExample" (click)="obtenerEmpresasID(empre._id)">
+                Editar</button>
+    </div>
+  </div>
+  </div>
+  </div>
+
+
+
+
+
+  </body>

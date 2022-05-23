@@ -12,6 +12,10 @@ import { EmpresasComponent } from './components/empresas/empresas.component';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { SearchPipe } from './pipes/search.pipe';
+import { Empresa2Component } from './components/empresa2/empresa2.component';
+import { GraficasComponent } from './components/graficas/graficas.component';
+import { ProductosEmpresaComponent } from './components/productos-empresa/productos-empresa.component';
+import { ProductosSucursalesComponent } from './components/productos-sucursales/productos-sucursales.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +27,10 @@ import { SearchPipe } from './pipes/search.pipe';
     SucursalesComponent,
     EmpresasComponent,
     SearchPipe,
+    Empresa2Component,
+    GraficasComponent,
+    ProductosEmpresaComponent,
+    ProductosSucursalesComponent,
 
   ],
   imports: [

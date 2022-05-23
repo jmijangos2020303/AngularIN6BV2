@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Usuario } from 'src/app/models/usuario.model';
 import { UsuarioService } from 'src/app/services/usuario.service';
 import Swal from 'sweetalert2';
+import { environment, environment2 } from 'src/environments/environment';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -10,45 +12,65 @@ import Swal from 'sweetalert2';
   styleUrls: ['./registro.component.scss']
 })
 export class RegistroComponent implements OnInit {
-
+  public usuarioModelPost: Usuario;
   public usuarioModel: Usuario;
   repeatPass: string = '';
+  public token;
 
-  constructor(
-    private userRest: UsuarioService
-  ) {
-    this.usuarioModel = new Usuario(
+  constructor(private _usuarioService: UsuarioService, private _router: Router) {
+    this.usuarioModelPost = new Usuario(
       "",
+      "",
+      "",
+      0,
       "",
       "",
       "",
       ""
     );
+
+    this.token = this._usuarioService.getToken();
   }
+
+  tipoEmpresas = environment2.tipoEmpresas;
+  departamentos = environment.departamentos;
 
   ngOnInit(): void {
   }
 
 
-  registro(){
-    this.userRest.registro(this.usuarioModel).subscribe({
-      next: (res:any)=>{
+  postRegistarEmpresa(){
+    this._usuarioService.RegistrarEmpresa(this.usuarioModelPost, this.token).subscribe(
+      (response) => {
+        console.log(response);
+
+        this.usuarioModelPost._id = '';
+        this.usuarioModelPost.nombre = '';
+        this.usuarioModelPost.email = '';
+        this.usuarioModelPost.telefono = 0;
+        this.usuarioModelPost.direccion = '';
+        this.usuarioModelPost.password = '';
+        this.usuarioModelPost.rol = '';
+        this.usuarioModelPost.tipoEmpresa = ''
+        this._router.navigate(['/login'])
         Swal.fire({
           icon: 'success',
-          title: res.mensaje,
+          title: 'Se Registro la Empresa',
           showConfirmButton: false,
           timer: 1500
         })
+
       },
-      error: (err)=>{
+      (error) => {
+        console.log(<any>error);
         Swal.fire({
           icon: 'error',
-          title: err.error.mensaje,
+          title: error.error.mensaje,
           showConfirmButton: false,
           timer: 1500
         })
       }
-    })
+    )
   }
 
 }

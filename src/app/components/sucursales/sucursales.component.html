@@ -1,242 +1,278 @@
-<body>
-<div class="cards">
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://static.thuisbezorgd.nl/images/chains/nl/subway/logo_465x320.png" alt="wave" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            Subway
-            <small>Alimentate saludable!</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
+<head>
+  <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Muli:300,700&display=swap" rel="stylesheet">
+</head>
+
+<body onload="init()" style="background: url(../../../assets/vid.img/fondo.jpg) no-repeat; background-size: cover;">
+  <div class="d-flex" id="content-wrapper">
+
+    <div class="w-100">
+      <!-- Contenido de la pagina -->
+
+      <div id="content" class="bg-grey w-100">
+        <section class="bg-light py-3">
+          <div class="container">
+            <div class="row">
+
+              <div class="col-lg-9 col-md-8">
+                <h1 class="font-weight-bold mb-0" *ngIf="_usuarioService.getIdentidad()">Empresa {{
+                  _usuarioService.getIdentidad().nombre }} </h1>
+              </div>
+              <div class="col-lg-3 col-md-6 d-flex stat my-3">
+                <button class="btn btn-primary w-100 align-self-center" routerLink="/productoempresa">Productos de la Empresa</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Mostar Datos Empresa -->
+        <!-- Mostar Sucursales Empresa -->
+        <section class=""*ngIf="token">
+          <div class="">
+            <div class="" *ngIf="load">
+              <div class="card-body">
+                <!-- Cifras -->
+                <div class="row">
+                  <div class="card" class="card" style="width: 18rem;" *ngFor="let empre of empresasModelGet">
+                    <img src="../../../assets/vid.img/fcb.jpg" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ empre.nombre }}</h5>
+
+                      <h8 class="card-text">Lugar: {{ empre.direccion }}</h8>
+                      <p></p>
+                      <h8 class="card-text">Contacto: {{ empre.telefono }}</h8>
+                    </div>
+                    <div class="card-body">
+                      <button type="button" class="btn btn-danger"
+                            (click)="deleteEmpresa(empre._id)">Eliminar</button>
+                            <button type="button" class="btn btn-secondary" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample"
+                            aria-controls="offcanvasExample" (click)="obtenerEmpresasID(empre._id)">
+                              Editar</button>
+
+                  </div>
+                </div>
+                </div>
+                </div>
+
+
+
+
+
+        <!-- Segundo Cuadro-->
+        <section class="" >
+          <div class="container">
+            <div class="row">
+              <div class="">
+                <h3 class="" *ngIf="token">Administra tus sucursales</h3>
+                <p class="lead text-muted" *ngIf="token">Estas son las sucursales</p>
+              </div>
+
+              <div class="col-lg-3 col-md-4 d-flex">
+                <button class="btn btn-primary w-100 align-self-center" data-bs-toggle="modal"
+                *ngIf="token" data-bs-target="#ModalAgregarSucursales">Agregar Sucursales</button>
+              </div>
+            </div>
+          </div>
+        </section>
+
+
+
+        <!--Agregar Sucursales-->
+        <div *ngIf="token" class="modal fade " id="ModalAgregarSucursales" data-bs-backdrop="static" data-bs-keyboard="false"
+          tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Agregar Sucursal</h5>
+                <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+              </div>
+              <div class="modal-body">
+
+
+
+
+
+
+                <form>
+
+
+
+                  <div class="mg-3">
+                    <label for="inputNombre" class="form-label">Nombre</label>
+                    <input type="text" id="inputNombre" class="form-control" name="nombre" #nombre="ngModel"
+                      [(ngModel)]="sucursalesModelPost.nombre">
+                  </div>
+
+
+
+                  <div class="mg-3">
+                    <label for="inputTelefono" class="form-label">Telefono</label>
+                    <input type="text" id="inputTelefono" class="form-control" name="telefono" #telefono="ngModel"
+                      [(ngModel)]="sucursalesModelPost.telefono">
+                  </div>
+
+
+
+                  <div class="mg-3">
+                    <label for="inputDireccion" class="form-label">Direccion</label>
+                    <input type="text" id="inputDireccion" class="form-control" name="direccion" #direccion="ngModel"
+                      [(ngModel)]="sucursalesModelPost.direccion">
+                  </div>
+
+
+
+                </form>
+
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="close" data-bs-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn offset" data-bs-dismiss="modal" (click)="postSucursales()">Agregar
+                  Sucursales</button>
+              </div>
+            </div>
           </div>
         </div>
+
+        <!-- Mostar Sucursales Empresa -->
+        <section class="bg-mix py-3"*ngIf="token">
+          <div class="container">
+            <div class="" *ngIf="load">
+              <div class="card-body">
+                <!-- Cifras -->
+                <div class="row">
+                  <div class="card" class="card" style="width: 18rem;" *ngFor="let empre of sucursalesModelGet">
+                    <img src="../../../assets/vid.img/Sucursal.png" class="card-img-top" alt="...">
+                    <div class="card-body">
+                      <h5 class="card-title">{{ empre.nombre }}</h5>
+
+                      <h8 class="card-text">Lugar: {{ empre.direccion }}</h8>
+                      <p></p>
+                      <h8 class="card-text">Contacto: {{ empre.telefono }}</h8>
+                    </div>
+                    <div class="card-body">
+                      <button class="btn btn-danger"
+                              (click)="eliminarSucursales(empre._id)">Eliminar</button>
+                      <button type="button" class="btn btn-warning" data-bs-toggle="offcanvas"
+                              data-bs-target="#offcanvasExample" aria-controls="offcanvasExample"
+                              (click)="getSucursalesId(empre._id)">
+                              Editar
+                            </button>
+                              <p></p>
+                              <button class="btn btn-primary w-100 align-self-center" routerLink="/productosucursal">Productos de la Sucursal</button>
+
+                  </div>
+                </div>
+                </div>
+                </div>
+
       </div>
     </div>
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/36/McDonald%27s_Golden_Arches.svg/800px-McDonald%27s_Golden_Arches.svg.png" alt="beach" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            McDonald
-            <small>Pide tu comida rapida!</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://graffica.info/wp-content/uploads/2017/07/2014-y-2016-EEUU-y-Asia.png" alt="mountain" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            Pizza Hut
-            <small>Ordena en Línea </small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://integro.gt/wp-content/uploads/2020/01/Latorre510%E2%80%8A-%C3%97%E2%80%8A340-300x200.png" alt="field" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            La Torre
-            <small>aprovecha las mejores ofertas</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
+         <!--Enviar productos a Sucursales-->
+         <div class="modal fade " id="ModalEnviarProducto" data-bs-backdrop="static" data-bs-keyboard="false"
+         tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+         <div class="modal-dialog modal-dialog-centered">
+           <div class="modal-content">
+             <div class="modal-header">
+               <h5 class="modal-title" id="staticBackdropLabel">Enviar Producto</h5>
+               <button type="button" class="close btn-close" data-bs-dismiss="modal" aria-label="Close">X</button>
+             </div>
+             <div class="modal-body" >
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://urbancomunicacion.com/wp-content/uploads/2018/05/Curiosa-historia-del-logo-de-Dominos-Pizza.png" alt="water" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            Dominos
-            <small>Pide tu Domino's Pizza favorita</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
+               <form>
+                 <div class="mg-3">
+                  <label for="inputNombreProductoSucursal" class="form-label">Nombre Producto</label>
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://mir-s3-cdn-cf.behance.net/projects/404/e2e38167241283.Y3JvcCw0ODMsMzc4LDIyOSwxMjY.png" alt="river" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            Pollo Campero
-            <small>Disfruta del sabor Campero</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
+                  <select class="form-select" aria-label="multiple select example" id="inputNombreProductoSucursal" class="form-control" name="NombreProductoSucursal" #NombreProductoSucursal="ngModel" [(ngModel)]="productoModelPost.NombreProductoSucursal">
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://brandemia.org/sites/default/files/inline/images/taco_bell_animacion2.gif" alt="kite" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            Taco Bell
-            <small>Descubre nuestro menú</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
+                    <option *ngFor="let su of productosModelGet" [value]="su.NombreProducto">{{su.NombreProducto}}</option>
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://trabajosinexperiencia.net/wp-content/uploads/2022/01/kfc-new-logo-72E6348046-seeklogo.com_.png" alt="underwater" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            KFC
-            <small>Disfruta de nuestro delicioso pollo</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
+                  </select>
 
-    <div class="card">
-      <div class="card__image-holder">
-        <img class="card__image" src="https://parquelasamericas.com.gt/wp-content/uploads/2018/06/go-Green.jpg" alt="desert" />
-      </div>
-      <div class="card-title">
-        <a href="#" class="toggle-info btn">
-          <span class="left"></span>
-          <span class="right"></span>
-        </a>
-        <h2>
-            Go Green
-            <small>siempre fresh está en Go Green</small>
-        </h2>
-      </div>
-      <div class="card-flap flap1">
-        <div class="card-description">
-          This grid is an attempt to make something nice that works on touch devices. Ignoring hover states when they're not available etc.
-        </div>
-        <div class="card-flap flap2">
-          <div class="card-actions">
-            <a href="#" class="btn">Read more</a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <ul>
+                </div>
+                 <div class="mg-3">
+                   <label for="inputStockSurcursal" class="form-label">Stock</label>
+                   <input type="number" id="inputStockSurcursal" class="form-control" name="StockSurcursal" #StockSurcursal="ngModel"
+                     [(ngModel)]="productoModelPost.StockSurcursal">
+                 </div>
+               </form>
 
-    </ul>
+             </div>
+             <div class="modal-footer">
+               <button type="button" class="close" data-bs-dismiss="modal">Cerrar</button>
+               <button type="button" class="btn offset" data-bs-dismiss="modal" (click)="putProductosSucursal()">Enviar Productos</button>
+             </div>
+           </div>
+         </div>
+       </div>
 
+
+
+<!-- OffCanvas Editar Sucursal -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Sucursal</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-</body>
+  <div class="offcanvas-body">
+    <form>
+
+      <div class="mb-3">
+        <label for="inputnombre" class="form-label">Nombre Sucursal</label>
+        <input type="text" class="form-control" id="inputnombre" name="nombre" #nombre="ngModel"
+          [(ngModel)]="sucursalesModelGetId.nombre">
+      </div>
+      <div class="mb-3">
+        <label for="inputtelefono" class="form-label">Telefono</label>
+        <input type="text" class="form-control" id="inputtelefono" name="telefono" #telefono="ngModel"
+          [(ngModel)]="sucursalesModelGetId.telefono">
+      </div>
+      <div class="mb-3">
+        <label for="inputdireccion" class="form-label">Direccion</label>
+        <input type="text" class="form-control" id="inputdireccion" name="direccion" #direccion="ngModel"
+          [(ngModel)]="sucursalesModelGetId.direccion">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="putSucursales()" data-bs-dismiss="offcanvas">Editar
+        Sucursales</button>
+    </form>
+  </div>
+</div>
+
+<!-- OffCanvas Editar Usuario -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasExample2" aria-labelledby="offcanvasExampleLabel">
+  <div class="offcanvas-header">
+    <h5 class="offcanvas-title" id="offcanvasExampleLabel">Editar Usuario</h5>
+    <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+  </div>
+  <div class="offcanvas-body">
+    <form>
+
+      <div class="mb-3">
+        <label for="inputnombre" class="form-label">Nombre</label>
+        <input type="text" class="form-control" id="inputnombre" name="nombre" #nombre="ngModel"
+          [(ngModel)]="empresasModelGetId.nombre">
+      </div>
+      <div class="mb-3">
+        <label for="inputemail" class="form-label">email</label>
+        <input type="text" class="form-control" id="inputemailr" name="email" #email="ngModel"
+          [(ngModel)]="empresasModelGetId.email">
+      </div>
+      <div class="mb-3">
+        <label for="inputtelefono" class="form-label">telefono</label>
+        <input type="number" class="form-control" id="inputtelefono" name="telefono" #telefono="ngModel"
+          [(ngModel)]="empresasModelGetId.telefono">
+      </div>
+      <div class="mb-3">
+        <label for="inputdireccion" class="form-label">direccion</label>
+        <input type="text" class="form-control" id="inputdireccion" name="direccion" #direccion="ngModel"
+          [(ngModel)]="empresasModelGetId.direccion">
+      </div>
+      <button type="submit" class="btn btn-success" (click)="putEmpresa()" data-bs-dismiss="offcanvas">Editar
+        Empresa</button>
+    </form>
+  </div>
+</div>
+

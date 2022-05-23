@@ -10,11 +10,9 @@
           <a class="nav-link" routerLink="/sucursales" routerLinkActive="active" >Empresas de Sucursales</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" routerLink="/empresas" routerLinkActive="active">Empresas</a>
-        </li>
-        <li class="nav-item">
           <a class="nav-link" routerLink="/login" routerLinkActive="active">login</a>
         </li>
+
         <li class="nav-item">
           <a class="nav-link disabled" *ngIf="_usuarioService.getIdentidad()">{{ _usuarioService.getIdentidad().nombre }}</a>
         </li>
